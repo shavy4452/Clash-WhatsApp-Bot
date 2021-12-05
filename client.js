@@ -6,8 +6,6 @@ const aysnc = require('async');
 const client = new Client({ puppeteer: { headless: false }});
 const coc = new cocClient();
 
-client.initialize();'
-
 
 client.initialize();
 
