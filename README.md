@@ -1,7 +1,7 @@
 # Clash-WhatsApp-Bot
 A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects through the WhatsApp Web browser app.
 
-## Installation
+## 📝  Installation
 1. Install [NodeJS](https://nodejs.org/en/download/)
 2. Install [NPM](https://www.npmjs.com/get-npm)
 3. Install [Git](https://git-scm.com/downloads)
@@ -12,20 +12,20 @@ A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects
 8. Scan the QR code shown in the console using your WhatsApp
 9. Enjoy!
 
-## Usage
+## ⚙️ Usage
 1. Send `!clan` to get the clan information
 2. Send `!player` to get the player information
 
 Note: This is just an example, you can add more commands and features to the bot. You can also use this bot as a base for your own bot.
 
-## Credits
+## ⭐️ Credits
 - [Shavy](https://github.com/shavy4452/) - Developer
 
-## License
+## ⚠️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 
-## Contributing
+## 🛂 Contributing
 1. Fork the repository ([here is the guide](https://help.github.com/articles/fork-a-repo/))
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
@@ -34,15 +34,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 6. Wait for your PR to be reviewed and merged
 7. Celebrate! :tada:
 
-## Contact
+## 📞 Contact
 - [Discord](https://discord.gg/BzbkwNdz)
 - [Email](mailto:shavygaming@gmail.com)
 
-## Donate
+## ⚡️ Donate
 - Send me a message on Discord or Email if you want to donate we accept donations through PayPal and Patreon and all other indian payment methods.
 
-## Disclaimer
+## ⚠️ Disclaimer
 This project is not affiliated with WhatsApp or any of its partners in any way. WhatsApp is a registered trademark of WhatsApp Inc. This project is an independent and unofficial API. Use at your own risk.
 
-## Support
-If you need help with this project, you can contact me on Discord or Email.
+## 🤚 Support
+If you need help with this project, you can contact me on Discord or Email. Also, you can join our Discord server for support and star this repository to show your support.
