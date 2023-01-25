@@ -1,12 +1,15 @@
 <h1 align="center">
-    <img src="https://s2.dmcdn.net/v/Tuglh1YSLVCeNUD4M/x480" alt="Clash WhatsApp Bot" width="200" height="200">
+    <img src="https://s2.dmcdn.net/v/Tuglh1YSLVCeNUD4M/x480" alt="Clash WhatsApp Bot">
     <br>
     Clash WhatsApp Bot ~ Made with ❤️
 </h1>
-[![GitHub issues](https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot)]
-[![GitHub license](https://img.shields.io/github/license/shavy4452/Clash-WhatsApp-Bot)]
-[![Discord](https://img.shields.io/discord/966293245665636362?color=7289da&label=Discord&logo=discord&logoColor=white)]
-A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects through the WhatsApp Web browser app.
+<p align="center">A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects through the WhatsApp Web browser app.</p>
+<p align="center">
+<a href="https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot/fork"><img src="https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot" alt="Github Issue's" /></a>
+<a href="https://nodejs.org/en/download/">
+   <img src="https://img.shields.io/badge/node-16.16.x-brightgreen?style=for-the-badge" alt="node.js">
+</a>
+</p>
 
 ## 📝  Installation
 1. Install [NodeJS](https://nodejs.org/en/download/)
