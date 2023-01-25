@@ -6,9 +6,6 @@
 <p align="center">A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects through the WhatsApp Web browser app.</p>
 <p align="center">
 <a href="https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot/fork"><img src="https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot" alt="Github Issue's" /></a>
-<a href="https://nodejs.org/en/download/">
-   <img src="https://img.shields.io/badge/node-16.16.x-brightgreen?style=for-the-badge" alt="node.js">
-</a>
 </p>
 
 ## 📝  Installation
