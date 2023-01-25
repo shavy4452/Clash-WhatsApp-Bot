@@ -1,4 +1,11 @@
-# Clash-WhatsApp-Bot
+<h1 align="center">
+    <img src="https://s2.dmcdn.net/v/Tuglh1YSLVCeNUD4M/x480" alt="Clash WhatsApp Bot" width="200" height="200">
+    <br>
+    Clash WhatsApp Bot ~ Made with ❤️
+</h1>
+[![GitHub issues](https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot)]
+[![GitHub license](https://img.shields.io/github/license/shavy4452/Clash-WhatsApp-Bot)]
+[![Discord](https://img.shields.io/discord/966293245665636362?color=7289da&label=Discord&logo=discord&logoColor=white)]
 A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects through the WhatsApp Web browser app.
 
 ## 📝  Installation
@@ -20,6 +27,7 @@ Note: This is just an example, you can add more commands and features to the bot
 
 ## ⭐️ Credits
 - [Shavy](https://github.com/shavy4452/) - Developer
+- [Supreme](https://github.com/real-supreme) - Developer
 
 ## ⚠️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
