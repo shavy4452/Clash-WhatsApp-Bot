@@ -3,5 +3,5 @@
         "email": "youremail@example.com",
         "password": "xxxxxxxxxx"
     },
-    "command_prefix": "?"
+    "command_prefix": "!"
 }

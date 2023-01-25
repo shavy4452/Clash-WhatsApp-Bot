@@ -1,22 +1,20 @@
 {
   "name": "whatsapp-bot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.2.1",
+  "description": "A Clash of Clans bot for WhatsApp",
+  "main": "client.js",
   "dependencies": {
     "axios": "^0.24.0",
-    "clashofclans.js": "git+https://github.com/clashperk/clashofclans.js.git",
+    "clashofclans.js": "^3.0.2",
     "install": "^0.13.0",
     "mongodb": "^4.2.0",
-    "selenium-webdriver": "^4.0.0",
-    "sqlite3": "^5.0.2",
-    "whatsapp-web.js": "github:tuyuribr/whatsapp-web.js#patch-10"
+    "whatsapp-web.js": "^1.19.2"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node client.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Shavy",
+  "license": "MIT"
 }
