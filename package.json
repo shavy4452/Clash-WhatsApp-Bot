@@ -4,15 +4,15 @@
   "description": "A Clash of Clans bot for WhatsApp",
   "main": "client.js",
   "dependencies": {
+    "@whiskeysockets/baileys": "^6.5.0",
     "axios": "^0.24.0",
     "clashofclans.js": "^3.0.2",
     "install": "^0.13.0",
+    "link-preview-js": "^3.0.5",
     "mongodb": "^4.2.0",
-    "whatsapp-web.js": "^1.19.2"
+    "qrcode-terminal": "^0.12.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node client.js"
   },
   "author": "Shavy",
