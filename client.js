@@ -1,137 +1,85 @@
-const { Client } = require('whatsapp-web.js');
-const { Client: cocClient } = require('clashofclans.js');
-const coc = new cocClient();
-const config = require('./config.json');
-
-const client = new Client({
-    authStrategy: new LocalAuth(),
-});
+const { DisconnectReason, useMultiFileAuthState} = require("@whiskeysockets/baileys");
+const makeWASocket = require("@whiskeysockets/baileys").default;
+const config = require("./config.json");
+const { ClashClient, loginToCOC  } = require("./helpers/auth");
 
 
-client.initialize();
+async function connectionLogic() {
+    await loginToCOC();
 
-client.on('qr', (qr) => {
-    console.log('QR RECEIVED', qr);
-});
+    const { state, saveCreds } = await useMultiFileAuthState("auth_info_baileys");
+    const sock = makeWASocket({
+        printQRInTerminal: true,
+        auth: state,
+    });
 
-client.on('authenticated', () => {
-    console.log('AUTHENTICATED');
-});
-
-client.on('auth_failure', msg => {
-    console.error('AUTHENTICATION FAILURE', msg);
-});
-
-client.on('ready', () => {
-    //client.sendMessage('91xxxxxxxxx@c.us','Whatshapp Bot has been connected!')
-    console.log('Socket Connected!');
-});
-
-// clash functions 
-async function clanInfo(tag){
-    try{
-        let clan = await coc.getClan(tag);
-        return `Requested Tag: ${clan.tag}\nClan Name: ${clan.name}\n Description: ${clan.description}\nMember Count: ${clan.memberCount}\nCups Required: ${clan.requiredTrophies}\nClan History: https://chocolateclash.com/cc_n/clan.php?tag=${clan.tag.replace("#","")}&rlim=10000&slim=10000`;
-    }catch(err){
-        console.log(err);
-        if(err.status == 404){
-            return `Not Found!`;
-        }else if(err.status == 503){
-            return `Service is temporarily unavailable because of maintenance.`;
-        }else{
-            return `Error!`;
+    sock.ev.on('connection.update', async({ connection, lastDisconnect }) => {
+        const status = lastDisconnect?.error?.output?.statusCode
+        if (connection === 'close'){
+            const reason = Object.entries(DisconnectReason).find(i => i[1] === status)?.[0] || 'unknown'
+            console.warn(`[WARN] Closed connection, status: ${reason} (${status})`)
+            if (status !== 403 && status === 401 && !status){
+                connectionLogic()
+            }
+        } else if (connection === 'open'){
+            console.log('[INFO] Connected to WhatsApp')
         }
+    })
+    
+    sock.ev.on("auth.info", saveCreds);
+    sock.ev.on("auth.failure", async (failure) => {
+        console.error(new Error("[ERROR] Auth failure: " + failure.error));
+        if (failure.error === "invalid_session") {
+            console.error("[INFO] Invalid session, re-authenticating...");
+            await sock.authenticate();
+        }
+    });
+
+    sock.ev.on("auth.success", async () => {
+        console.log("[INFO] Authenticated successfully");
+    });
+
+    async function sendError(err, data){
+        let owner = config.developer;
+        return await sock.sendMessage(owner + "@s.whatsapp.net", 
+            {text : "An error occurred! here is the error object:\n\n" + err + "\n\n" + JSON.stringify(data)});
     }
+
+    sock.ev.on("groups.upsert", async (groupInfoUpsert) => {
+        console.log(groupInfoUpsert)
+    })
+
+    sock.ev.on("messages.upsert", async (messageInfoUpsert) => {
+        try{
+            if (!messageInfoUpsert.messages[0].message || messageInfoUpsert.messages[0].key.fromMe) return;
+            var messageText = "";
+            var message = messageInfoUpsert.messages[0].message;
+            if (message.extendedTextMessage || message.conversation) {
+                messageText = (message.extendedTextMessage ? message.extendedTextMessage.text : message.conversation).toLowerCase();
+            }
+            if (messageText[0] !== config.command_prefix) return;
+            var command = messageText.split(" ")[0].slice(1);
+            var args = messageText.split(" ").slice(1);
+            const { key: { participant, remoteJid } } = messageInfoUpsert.messages[0];
+            const author = (participant || remoteJid)?.split("@")[0];
+            var commandFile = require(`./commands/${command}.js`);
+            return await commandFile.run(sock, messageInfoUpsert, args, author, ClashClient, sendError);           
+        }catch(err){
+            if(err.code === "MODULE_NOT_FOUND") return;
+            console.log(err);
+            return await sendError(err, messageInfoUpsert);
+        }
+    });
+
+    sock.ev.on("creds.update", saveCreds);
+
+    sock.ev.on("contacts.set", () => {
+        console.log("got contacts", Object.values(store.contacts));
+    });
+
+    sock.ev.on("chats.set", (contacts) => {
+        console.log("got chats", Object.values(store.chats));
+    }); 
 }
 
-async function playerInfo(tag){
-    try{
-        let player = await coc.getPlayer(tag);
-        return player.name;
-    }catch(err){
-        console.log(err);
-        if(err.status == 404){
-            return `Not Found!`;
-        }else if(err.status == 503){
-            return `Service is temporarily unavailable because of maintenance.`;
-        }else{
-            return `Error!`;
-        }
-    }
-}
-
-client.on('message', async msg => {
-    var prefix = config.command_prefix;
-    var args = msg.body.slice(prefix.length).trim().split(/ +/g);
-    var command = args.shift().toLowerCase();
-    if (msg.body.startsWith(prefix)) {
-        if(command == 'clan'){
-            clanInfo(args[0]).then((res) => {
-                return msg.reply(res);
-            });
-        }else if(command == 'player'){
-            playerInfo(args[0]).then((res) => {
-                return msg.reply(res);
-            });
-        }
-    }
-});
-
-client.on('message_revoke_everyone', async (after, before) => {
-    // Fired whenever a message is deleted by anyone (including you)
-    console.log(after); // message after it was deleted.
-    if (before) {
-        console.log(before); // message before it was deleted.
-    }
-});
-
-client.on('message_revoke_me', async (msg) => {
-    // Fired whenever a message is only deleted in your own view.
-    console.log(msg.body); // message before it was deleted.
-});
-
-client.on('message_ack', (msg, ack) => {
-    /*
-        == ACK VALUES ==
-        ACK_ERROR: -1
-        ACK_PENDING: 0
-        ACK_SERVER: 1
-        ACK_DEVICE: 2
-        ACK_READ: 3
-        ACK_PLAYED: 4
-    */
-
-    if(ack == 3) {
-        // The message was read
-    }
-});
-
-client.on('group_join', (notification) => {
-    // User has joined or been added to the group.
-    console.log('join', notification);
-    notification.reply('User joined.');
-});
-
-client.on('group_leave', (notification) => {
-    // User has left or been kicked from the group.
-    console.log('leave', notification);
-    notification.reply('User left.');
-});
-
-client.on('group_update', (notification) => {
-    // Group picture, subject or description has been updated.
-    console.log('update', notification);
-});
-
-client.on('change_state', state => {
-    console.log('CHANGE STATE', state );
-});
-
-client.on('disconnected', (reason) => {
-    console.log('Client was logged out', reason);
-});
-
-(async function () {
-    await coc.login({ email: config.coc_dev_data.email, password: config.coc_dev_data.password });
-    console.log('Clash of Clans API Connected!');
-})();
+connectionLogic();

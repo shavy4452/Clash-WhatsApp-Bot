@@ -3,7 +3,7 @@
     <br>
     Clash WhatsApp Bot ~ Made with ❤️
 </h1>
-<p align="center">A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects through the WhatsApp Web browser app.</p>
+<p align="center">A Clash Of Clans Bot based on a WhatsApp client library for NodeJS that connects through the WhatsApp Web Socket Using a library called <a href="https://github.com/WhiskeySockets/Baileys" target="_blank">Baileys</a>. Bailey's is a super light weight library that allows you to use WhatsApp Web's functions in your code without using browser. This bot is made for educational purposes only and is not affiliated with WhatsApp or any other company.</p>
 <p align="center">
 <a href="https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot/fork"><img src="https://img.shields.io/github/issues/shavy4452/Clash-WhatsApp-Bot" alt="Github Issue's" /></a>
 </p>
@@ -15,19 +15,33 @@
 4. Clone this repository using `git clone https://github.com/shavy4452/Clash-WhatsApp-Bot.git && cd Clash-WhatsApp-Bot`
 5. Install the dependencies using `npm install`
 6. Change the coc developer email and password in `config.json`
-7. Run the bot using `node client.js`
+7. Run the bot using `npm start`
 8. Scan the QR code shown in the console using your WhatsApp
 9. Enjoy!
 
 ## ⚙️ Usage
-1. Send `!clan` to get the clan information
-2. Send `!player` to get the player information
+1. Send `!clan` to get the clan information.
+2. Send `!player` to get the player information.
+3. Send `!help` to get the list of commands.
+4. Send `!badge` to get the clan badge.
 
 Note: This is just an example, you can add more commands and features to the bot. You can also use this bot as a base for your own bot.
 
+## 📝 Configuration
+- `config.json` - The main configuration file for the bot.
+```json
+{
+    "coc_dev":{
+        "email": "", // Your Clash Of Clans Developer Email
+        "password": "" // Your Clash Of Clans Developer Password
+    },
+    "developer": "919xxxxxxxx", // Your WhatsApp Number
+    "command_prefix": "!"
+}
+```
+Do you want to try the ready to use bot? [Click Here]()
 ## ⭐️ Credits
 - [Shavy](https://github.com/shavy4452/) - Developer
-- [Supreme](https://github.com/real-supreme) - Developer
 
 ## ⚠️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
