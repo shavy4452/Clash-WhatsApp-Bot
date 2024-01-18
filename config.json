@@ -1,7 +1,8 @@
 {
-    "coc_dev_data":{
-        "email": "youremail@example.com",
-        "password": "xxxxxxxxxx"
+    "coc_dev":{
+        "email": "admin@clashpanda.xyz",
+        "password": "ClashPanda@0710"
     },
+    "developer": "919xxxxxxxx",
     "command_prefix": "!"
 }
